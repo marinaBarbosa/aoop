@@ -17,13 +17,22 @@ interface IConnection {
 }
 
 class Database { 
-    private char[] tab = new char[100]; 
+    private char[] tab;
     //Database should be the Singleton
-    private Database(){};
+    private Database(){
+        tab = new char[100]; 
+    };
+    private static Database bd = null;
     
     public static IConnection getConnection() { 
         return Connection.getInstance();
     } 
+    public static Database getInstance() {
+        if (bd == null) {
+            return bd = new Database();
+        }
+        return bd;
+    }
     
     private static class Connection implements IConnection { 
         private Database db;        
@@ -33,15 +42,17 @@ class Database {
     private Connection (Database db) {
         this.db = db;
     }
+    private Connection () {
+        db = Database.getInstance();
+    }
     
     public static IConnection getInstance(){    
         if (connection == null) {
-            Database c = new Database();
             //Multitons: there exists only three of them returned by the getInstance method 
-            connection = new Connection[]{ new Connection(c),new Connection(c),new Connection(c) };
+            connection = new Connection[]{ new Connection(),new Connection(),new Connection() };
         }
         //round-robin fasion
-        index = (index+1) % connection.length;
+        index = (index + 1) % connection.length;
         return connection[index]; 
     } 
     public char get(int index) { 
