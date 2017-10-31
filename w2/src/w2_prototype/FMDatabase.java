@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package w2_fm;
+package w2_prototype;
 
 import java.util.HashMap;
 import java.util.List;
@@ -12,24 +12,49 @@ import java.util.List;
  *
  * @author marina
  */
-abstract class FMDatabase {
+public class FMDatabase {
     
+    private List<Integer> prototype;
     private HashMap <Integer,List<Integer>> data;
-    protected abstract List<Integer> createList();
+    //protected abstract List<Integer> createList();
+    
     public FMDatabase() {
-        data = new HashMap<>();
+        //data = new HashMap<>();
+        data = new HashMap<Integer,List<Integer>>();
+
     };
 	
+    public FMDatabase(List<Integer> l) {
+        flag(l);
+        data = new HashMap<>();
+    }
+	
+
+    public void flag(List<Integer> l) {
+        this.prototype = l;
+    }
+    
+    
+    public List<Integer> clonePrototype() {
+        try {
+            return (List)(prototype.getClass().getMethod("clone",new Class[0]).invoke(prototype, new Object[0]));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    
     //adding the pair (number1, number2) to the database
     public void put(int number1, int number2) {
         if (contains(number1,number2)) {
             if(data.containsKey(number1)) {
                 data.get(number1).add(number2);
-                System.out.println("Already exist the key! - put the number");
+                System.out.println("Already exist the key -> put the number");
             }
         }
         else {
-            data.put(number1, createList());
+            data.put(number1,clonePrototype());
             data.get(number1).add(number2);
             System.out.println("Add new number! + Key!");
         } 
