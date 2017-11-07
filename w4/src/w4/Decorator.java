@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package w3;
+package w4;
 
 /**
  *
- * @author marin
+ * @author marina
  */
-public class W3 {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+abstract class Decorator implements IPiece {
+    IPiece decorated;
+    Decorator(IPiece decorated) {
+            this.decorated = decorated;
     }
-    
 }

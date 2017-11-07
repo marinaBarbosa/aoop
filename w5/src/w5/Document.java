@@ -3,16 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package w3;
+package w5;
 
 /**
  *
  * @author marin
  */
-
-interface TableModel {
+public class Document {
     
-}
-        
-public class Database {
 }
