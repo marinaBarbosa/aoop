@@ -9,6 +9,20 @@ package w5;
  *
  * @author marin
  */
-public class Paragraph {
+public class Paragraph extends Chapter {
+    Character c;
+    
+    public Paragraph() {
+        super();
+    }
+    public Paragraph(String s) {
+        super();
+        s.chars();
+    }
+    public void addCharacter(Character c) {
+        this.c = c;
+    }
+        
+
     
 }

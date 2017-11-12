@@ -9,6 +9,15 @@ package w5;
  *
  * @author marin
  */
-public class Chapter {
+public class Chapter extends Document{
+    Paragraph pr;
+    
+    public Chapter() {
+       super(); 
+    }
+    public void addParagraph(Paragraph pr) {
+        this.pr = pr;
+        
+    }
     
 }

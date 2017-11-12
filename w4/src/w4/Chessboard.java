@@ -14,7 +14,7 @@ import java.io.*;
 
 /**
  *
- * @author marin
+ * @author marina
  */
 
 public class Chessboard extends JPanel {
@@ -23,35 +23,42 @@ public class Chessboard extends JPanel {
     private HashMap<Point, IPiece> board = new HashMap<Point, IPiece>();
 	
     public void drop(IPiece p, int x, int y)	{
-        repaint();
-        p.moveTo(x,y);
-        board.put(new Point(x, y), p); // jeśli na tych współrzędnych
-                                        //jest już jakaś figura, znika ona z planszy
-                                        //(HashMap nie dopuszcza powtórzeń)
+        if (p != null){
+            repaint();
+            p.moveTo(x,y);
+            board.put(new Point(x, y), p); // jeśli na tych współrzędnych
+                                            //jest już jakaś figura, znika ona z planszy
+                                            //(HashMap nie dopuszcza powtórzeń)
+        }
+
     }
     public IPiece take(int x, int y)	{
-            repaint();
-            return board.remove(new Point(x, y));
+        repaint();
+        return board.remove(new Point(x, y));
     }
 	
     private Image image;
     private IPiece dragged = null;
     private Point mouse = null;
-    private Point clicked = null;
 	
-    public void paint(Graphics g) {
-        g.drawImage(image, 0, 0, null);
-        for(Map.Entry<Point, IPiece> e : board.entrySet()) {
-            Point pt = e.getKey();
-            IPiece pc = e.getValue();
-            pc.draw((Graphics2D)g);
-        }
-        if(mouse != null && dragged != null) {
-            dragged.draw((Graphics2D)g);
+    public void paint(Graphics g) throws NullPointerException{
+        try{
+            g.drawImage(image, 0, 0, null);
+        
+            for(Map.Entry<Point, IPiece> e : board.entrySet()) {
+                Point pt = e.getKey();
+                IPiece pc = e.getValue();
+                pc.draw((Graphics2D)g);
 
+                if(mouse != null && dragged != null) {
+                    dragged.draw((Graphics2D)g);
+                }
+            }
+        } catch (NullPointerException e){
+            System.out.println("ERRO");
         }
     }
-        
+    
     Chessboard() {
         board.put(new Point(0,2), new AffineDecorator(new Piece(11,0,2)));
         board.put(new Point(0,6), new AffineDecorator(new Piece(0,0,6)));
@@ -67,29 +74,21 @@ public class Chessboard extends JPanel {
 
         image = new ImageIcon(Chessboard.class.getResource("/img/board3.png")).getImage();
         setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
-		
+
         this.addMouseListener(new MouseAdapter(){
             public void mousePressed(MouseEvent ev) {
-                    dragged = take((ev.getX()-ZEROX)/IPiece.TILESIZE, (ev.getY()-ZEROY)/IPiece.TILESIZE);
+                    dragged = take((ev.getX()-ZEROX)/Piece.TILESIZE, (ev.getY()-ZEROY)/Piece.TILESIZE);
                     mouse = ev.getPoint();
-
-                    dragged = new AffineDecorator(dragged, AffineDecorator.generateAT(0,0)); 
-                    clicked = mouse;
             }
             public void mouseReleased(MouseEvent ev) {
-                dragged = ((AffineDecorator)dragged).getDecorated();
-                drop(dragged, (ev.getX()-ZEROX)/IPiece.TILESIZE, (ev.getY()-ZEROY)/IPiece.TILESIZE);
-                dragged = null;
-                undo.setEnabled(true);
-                clicked = null;
+                    drop(dragged, (ev.getX()-ZEROX)/Piece.TILESIZE, (ev.getY()-ZEROY)/Piece.TILESIZE);
+                    dragged = null;
+                    undo.setEnabled(true);
             }
         });
         this.addMouseMotionListener(new MouseMotionAdapter(){
                 public void mouseDragged(MouseEvent ev)	{
                         mouse = ev.getPoint();
-                        dragged = ((AffineDecorator)dragged).getDecorated(); //take out decorator
-                        dragged = new AffineDecorator(dragged, AffineDecorator.generateAT(mouse.getX() - clicked.getX(), mouse.getY() - clicked.getY()));	
-                        System.out.println("Pos:" + (mouse.getX() - clicked.getX()) + " " + mouse.getY());
                         repaint();
                 }
         });

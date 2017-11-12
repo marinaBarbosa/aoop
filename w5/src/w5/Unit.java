@@ -9,11 +9,6 @@ package w5;
  *
  * @author marin
  */
-public class Character {
-    
-    public Character() {
-        super();
-    }
-            
+public abstract class Unit {
     
 }

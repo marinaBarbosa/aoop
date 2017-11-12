@@ -41,6 +41,7 @@ class AffineDecorator extends Decorator  {
         g.setTransform(tr);
         decorated.draw(g);
         g.setTransform(backup);
+        
     }
     
     public int getX(){

@@ -7,8 +7,21 @@ package w5;
 
 /**
  *
- * @author marin
+ * @author marina
  */
+
 public class Document {
+    Chapter ch;
+    public Document() {
+        super();
+    }
+ 
+    public void addChapter(Chapter ch){
+        this.ch = ch;
+        
+    }
     
+    public void print() {
+        System.out.println("DOCUMENT"+ ch);
+    }
 }
