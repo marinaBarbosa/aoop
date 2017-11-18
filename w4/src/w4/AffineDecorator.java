@@ -10,19 +10,12 @@ import java.awt.geom.AffineTransform;
 
 /**
  *
- * @author marin
+ * @author marina
  */
 
 class AffineDecorator extends Decorator  {
-    
-    public static AffineTransform generateAT(double x, double y) {
-        AffineTransform at = new AffineTransform();
-        at.translate(x,y);
-        return at;
-    }
-	
     private AffineTransform tr = null;
-
+    
     public AffineDecorator(IPiece decorated) {
         super(decorated);
     }
@@ -32,24 +25,26 @@ class AffineDecorator extends Decorator  {
     }
     @Override
     public void draw(Graphics2D g) {
-        AffineTransform backup = g.getTransform();
+        AffineTransform b = g.getTransform();
         if(tr == null) {
             tr = new AffineTransform();
             tr.translate(Chessboard.ZEROX, Chessboard.ZEROY);
             tr.scale(Piece.TILESIZE, Piece.TILESIZE);
         }
         g.setTransform(tr);
-        decorated.draw(g);
-        g.setTransform(backup);
-        
+        decorated.draw(g);  
+        g.setTransform(b);
     }
     
+    @Override
     public int getX(){
         return decorated.getX();
     }
+    @Override
     public int getY(){ 
         return decorated.getY();
     }
+    @Override
     public void moveTo(int x, int y){
         decorated.moveTo(x,y);
     }

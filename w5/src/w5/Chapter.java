@@ -7,17 +7,29 @@ package w5;
 
 /**
  *
- * @author marin
+ * @author marina
  */
-public class Chapter extends Document{
-    Paragraph pr;
+
+import java.util.ArrayList;
+
+public class Chapter extends Unit{
+    
+    ArrayList<Paragraph> pr = new ArrayList<>();
     
     public Chapter() {
        super(); 
     }
-    public void addParagraph(Paragraph pr) {
-        this.pr = pr;
-        
+  
+    public void addParagraph(Unit paragraph) {
+        pr.add((Paragraph) paragraph);
     }
-    
+
+    public void print() {
+        String s = "";
+        for (int i=0; i< pr.size(); i++ ) {
+            s = s + pr.get(i);
+            
+        }
+        System.out.println(s);
+    }
 }

@@ -13,9 +13,9 @@ import java.awt.Graphics2D;
  */
 
 interface IPiece {
-	public static final int TILESIZE = 32;
-	void draw(Graphics2D g);
-	int getX();
-	int getY();
-	void moveTo(int xx, int yy);
+    public static final int TILESIZE = 32;
+    void draw(Graphics2D g);
+    int getX();
+    int getY();
+    void moveTo(int xx, int yy);
 }

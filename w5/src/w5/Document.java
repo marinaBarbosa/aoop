@@ -4,24 +4,28 @@
  * and open the template in the editor.
  */
 package w5;
-
 /**
  *
  * @author marina
  */
+import java.util.ArrayList;
 
-public class Document {
-    Chapter ch;
+public class Document extends Unit{
+    ArrayList<Chapter> ch = new ArrayList();
+    
     public Document() {
         super();
     }
- 
-    public void addChapter(Chapter ch){
-        this.ch = ch;
-        
-    }
     
     public void print() {
-        System.out.println("DOCUMENT"+ ch);
+        String s = "";
+        for(int i = 0;i < ch.size();i++){
+            s = s + ch.get(i);
+        }
+        System.out.println(s);
+    }
+
+    public void addChapter(Unit chapter) {
+        ch.add((Chapter)chapter);
     }
 }

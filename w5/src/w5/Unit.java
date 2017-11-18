@@ -7,8 +7,13 @@ package w5;
 
 /**
  *
- * @author marin
+ * @author marina
  */
 public abstract class Unit {
     
+    public void print(){}
+    public void remove(Unit newDocComp){}
+    public void addChapter(Unit chapter){}
+    public void addParagraph(Unit Paragraph){}
+    public void addCharacter(Unit Character){}
 }

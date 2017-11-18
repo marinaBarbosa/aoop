@@ -7,10 +7,9 @@ package w4;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.*;
 import java.awt.event.*;
 import java.util.*; 
-import java.io.*;
+
 
 /**
  *
@@ -21,7 +20,6 @@ public class Chessboard extends JPanel {
     public static final int ZEROX = 23;
     static final int ZEROY = 7;
     private HashMap<Point, IPiece> board = new HashMap<Point, IPiece>();
-	
     public void drop(IPiece p, int x, int y)	{
         if (p != null){
             repaint();
@@ -30,7 +28,6 @@ public class Chessboard extends JPanel {
                                             //jest już jakaś figura, znika ona z planszy
                                             //(HashMap nie dopuszcza powtórzeń)
         }
-
     }
     public IPiece take(int x, int y)	{
         repaint();
@@ -41,22 +38,22 @@ public class Chessboard extends JPanel {
     private IPiece dragged = null;
     private Point mouse = null;
 	
-    public void paint(Graphics g) throws NullPointerException{
-        try{
-            g.drawImage(image, 0, 0, null);
-        
-            for(Map.Entry<Point, IPiece> e : board.entrySet()) {
-                Point pt = e.getKey();
-                IPiece pc = e.getValue();
-                pc.draw((Graphics2D)g);
+    @Override
+    public void paint(Graphics g){
+        g.drawImage(image, 0, 0, null);
 
-                if(mouse != null && dragged != null) {
-                    dragged.draw((Graphics2D)g);
-                }
-            }
-        } catch (NullPointerException e){
-            System.out.println("ERRO");
+        for(Map.Entry<Point, IPiece> e : board.entrySet()) {
+            Point pt = e.getKey();
+            IPiece pc = e.getValue();
+            pc.draw((Graphics2D)g);
         }
+        if(mouse != null && dragged != null) {
+            dragged.draw((Graphics2D)g);
+        }
+        else {
+            repaint();
+        }
+           
     }
     
     Chessboard() {
@@ -76,15 +73,15 @@ public class Chessboard extends JPanel {
         setPreferredSize(new Dimension(image.getWidth(null), image.getHeight(null)));
 
         this.addMouseListener(new MouseAdapter(){
-            public void mousePressed(MouseEvent ev) {
-                    dragged = take((ev.getX()-ZEROX)/Piece.TILESIZE, (ev.getY()-ZEROY)/Piece.TILESIZE);
-                    mouse = ev.getPoint();
-            }
-            public void mouseReleased(MouseEvent ev) {
-                    drop(dragged, (ev.getX()-ZEROX)/Piece.TILESIZE, (ev.getY()-ZEROY)/Piece.TILESIZE);
-                    dragged = null;
-                    undo.setEnabled(true);
-            }
+                public void mousePressed(MouseEvent ev) {
+                        dragged = take((ev.getX()-ZEROX)/Piece.TILESIZE, (ev.getY()-ZEROY)/Piece.TILESIZE);
+                        mouse = ev.getPoint();
+                }
+                public void mouseReleased(MouseEvent ev) {
+                        drop(dragged, (ev.getX()-ZEROX)/Piece.TILESIZE, (ev.getY()-ZEROY)/Piece.TILESIZE);
+                        dragged = null;
+                        undo.setEnabled(true);
+                }
         });
         this.addMouseMotionListener(new MouseMotionAdapter(){
                 public void mouseDragged(MouseEvent ev)	{
@@ -94,13 +91,14 @@ public class Chessboard extends JPanel {
         });
     }
 	
-    class UndoButton implements ActionListener {
-        public void actionPerformed(ActionEvent ev) {
-            System.out.println("UNDO");
-            redo.setEnabled(true);
-        }
+    class UndoButton implements ActionListener	{
+            public void actionPerformed(ActionEvent ev)
+            {
+                    System.out.println("UNDO");
+                    redo.setEnabled(true);
+            }
     }
-	
+
     class RedoButton implements ActionListener 	{
             public void actionPerformed(ActionEvent ev) 	{
                     System.out.println("REDO");

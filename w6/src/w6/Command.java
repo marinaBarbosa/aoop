@@ -3,21 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package w5;
-
-import java.util.ArrayList;
+package w6;
 
 /**
  *
- * @author marin
+ * @author marina
  */
-public class Character extends Unit{
-
-    
-    public Character(Paragraph p) {
-        super();
-    }
-
-            
-    
+interface Command {
+    void undo();
+    void redo();
+    int getValue();
 }
