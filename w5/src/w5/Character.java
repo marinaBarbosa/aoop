@@ -5,19 +5,21 @@
  */
 package w5;
 
-import java.util.ArrayList;
-
 /**
  *
- * @author marin
+ * @author marina
  */
+
 public class Character extends Unit{
 
-    
-    public Character(Paragraph p) {
-        super();
+    char c;
+	
+    Character(char c){
+        this.c = c;	
+    }    
+	
+    public void print() {	
+        System.out.printf("%c",c);	
     }
-
-            
-    
+		
 }

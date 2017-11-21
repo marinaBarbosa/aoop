@@ -9,11 +9,11 @@ package w5;
  *
  * @author marina
  */
+
 public abstract class Unit {
     
-    public void print(){}
-    public void remove(Unit newDocComp){}
+    public void print(Boolean x){}
     public void addChapter(Unit chapter){}
-    public void addParagraph(Unit Paragraph){}
-    public void addCharacter(Unit Character){}
+    public void addParagraph(Unit paragraph){}
+    public void addCharacter(Unit character) {}
 }

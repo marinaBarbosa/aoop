@@ -3,12 +3,17 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package w6;
+package w6.memento;
 
 /**
  *
- * @author marina
+ * @author marin
  */
-public class PushCommand implements Command{
-    
+public interface IStack {
+	void push(int i);
+	void pop();
+	void undo();
+	void redo();
+	boolean empty();
+	int top();
 }

@@ -8,6 +8,7 @@ package w5;
  *
  * @author marina
  */
+
 import java.util.ArrayList;
 
 public class Document extends Unit{
@@ -17,15 +18,13 @@ public class Document extends Unit{
         super();
     }
     
-    public void print() {
-        String s = "";
-        for(int i = 0;i < ch.size();i++){
-            s = s + ch.get(i);
-        }
-        System.out.println(s);
-    }
-
     public void addChapter(Unit chapter) {
         ch.add((Chapter)chapter);
+    }
+        
+    public void print(Boolean x) {
+        for(int i = 0;i < ch.size();i++){
+            ch.get(i).print((Boolean)null);
+        }
     }
 }

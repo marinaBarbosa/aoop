@@ -3,30 +3,31 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package w6;
+package w6.command;
 
 /**
  *
  * @author marina
  */
-public class PopCommand implements Command{
+
+public class PushCommand implements Command{
     private int i;
     private Stack s;
             
-    PopCommand(int i,Stack s){
+    PushCommand(int i,Stack s){
         this.i = i;
         this.s = s;
     }
     @Override
     public void undo() {
         s.data.removeLast();
-    } 
-    public int getValue(){
-        return i;
     }
-
-    //@Override
-    /*public void redo() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }*/
+    @Override
+    public void redo() {
+        s.data.addLast(i);
+    }
+    @Override
+    public int getValue() {
+        return i;        
+    }
 }

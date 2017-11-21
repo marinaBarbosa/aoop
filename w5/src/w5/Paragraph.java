@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 
 /**
  *
- * @author marin
+ * @author marina
  */
 public class Paragraph extends Unit {
     
@@ -29,13 +29,16 @@ public class Paragraph extends Unit {
     public void addCharacter(Unit c) {
         Character characterf = (Character) c;
         character.add(characterf);  
+        
     }
         
-    public void print() {
-        String s = "";
-        for (int i=0; i<character.size();i++) {
-            s = s + character.get(i).toString();
+    public void print(Boolean x) {
+        Character c ;
+        for (int i=0; i<paragraph.length();i++) {
+            c = new Character(paragraph.charAt(i));
+            c.print();
         }
-        System.out.println(s);
     }
 }
+        
+        

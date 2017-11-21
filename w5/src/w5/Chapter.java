@@ -20,16 +20,16 @@ public class Chapter extends Unit{
        super(); 
     }
   
+    @Override
     public void addParagraph(Unit paragraph) {
         pr.add((Paragraph) paragraph);
     }
 
-    public void print() {
+    public void print(Boolean x) {
         String s = "";
-        for (int i=0; i< pr.size(); i++ ) {
-            s = s + pr.get(i);
-            
+        for (int i=0; i< pr.size(); i++ ) {    
+            pr.get(i).print((Boolean)null);
+            System.out.println("\n");
         }
-        System.out.println(s);
     }
 }

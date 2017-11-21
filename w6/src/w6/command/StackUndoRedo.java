@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package w6;
+package w6.command;
 
 /**
  *
@@ -57,7 +57,7 @@ StackUndoRedo() {
                 JOptionPane.showMessageDialog(null, "Stack empty !");
             else { 
                 stack.pop(); 
-                refresh(); 
+                refresh();
             }
         }
     });
