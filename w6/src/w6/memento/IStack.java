@@ -7,13 +7,14 @@ package w6.memento;
 
 /**
  *
- * @author marin
+ * @author marina
  */
+
 public interface IStack {
-	void push(int i);
-	void pop();
-	void undo();
-	void redo();
-	boolean empty();
-	int top();
+    void push(int i);
+    void pop();
+    void undo();
+    void redo();
+    boolean empty();
+    int top();
 }

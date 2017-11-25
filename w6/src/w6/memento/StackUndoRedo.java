@@ -7,7 +7,7 @@ package w6.memento;
 
 /**
  *
- * @author marin
+ * @author marina
  */
 
 
@@ -19,34 +19,35 @@ import javax.swing.event.*;
 import w6.memento.IStack;
 import w6.memento.Stack;
 
-
 public class StackUndoRedo extends JFrame{ 
     private IStack stack=new Stack();
     JTextField message = new JTextField("<empty>");
+    
     public static void main(String[] args) {
         new StackUndoRedo().setVisible(true);
     }
-StackUndoRedo() {
+    
+    StackUndoRedo() {
     setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     getContentPane().setLayout(new GridLayout(2,3));
+    
     JButton b=new JButton("Push"); add(b);
-
     b.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            String s=JOptionPane.showInputDialog(null, "Give a number: ");
-            if (s==null) return;
+        public void actionPerformed(ActionEvent e) {
+        String s=JOptionPane.showInputDialog(null, "Give a number: ");
+            if (s==null) 
+                return;
             int i=0;
             try { 
                 i=Integer.parseInt(s); 
                 stack.push(i); 
                 refresh();
             }
-            catch (Exception ex) { 
-                JOptionPane.showMessageDialog(null, "Bad number"); 
+            catch (Exception ex) { JOptionPane.showMessageDialog(null, "Bad number"); 
             }
         }
     });
-    
+
     b=new JButton("Undo"); add(b);
     b.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -54,7 +55,9 @@ StackUndoRedo() {
             refresh();
         }
     });
+    
     add(new JLabel("Top of the stack: "));
+    
     b=new JButton("Pop"); add(b);
     b.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -62,10 +65,11 @@ StackUndoRedo() {
                 JOptionPane.showMessageDialog(null, "Stack empty !");
             else { 
                 stack.pop(); 
-                refresh();
+                refresh(); 
             }
         }
     });
+
     b=new JButton("Redo"); add(b);
     b.addActionListener(new ActionListener() {
         public void actionPerformed(ActionEvent e) {
@@ -73,9 +77,11 @@ StackUndoRedo() {
             refresh();
         }
     });
+    
     add(message);
     pack(); 
-    }
+}
+
     private void refresh(){
         if (stack.empty()) message.setText("<empty>");
         else message.setText(stack.top()+"");
