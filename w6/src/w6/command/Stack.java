@@ -15,7 +15,6 @@ import javax.swing.JFrame;
  */
 
 public class Stack implements IStack {
-    //Command e;
     LinkedList <Integer> data = new LinkedList();
     LinkedList <Command> undoCommandList = new LinkedList();
     LinkedList <Command> redoCommandList = new LinkedList();
@@ -24,7 +23,6 @@ public class Stack implements IStack {
     public void push(int i) {
         data.add(i);
         undoCommandList.add(new PushCommand(top(), this));
-        System.out.println(top());
     }
 
     @Override
@@ -32,7 +30,6 @@ public class Stack implements IStack {
         try{
             undoCommandList.add(new PopCommand(top(),this));
             data.removeLast();
-            System.out.println(top());
         }
         catch (NoSuchElementException e){
            System.out.println("EMPTY STACK -> POP");
@@ -52,52 +49,30 @@ public class Stack implements IStack {
     }
 
     @Override
-    public void undo(){ //need save the operations - if make redo operation
-        
+    public void undo(){       
         try{
             Command h1 = undoCommandList.getLast();
-            undoCommandList.removeLast();
-        
-            Command h2 = h1;
-		
-            if (h1.getClass().getName().equals("commandGUI.PushCommand")) {
-                h2 = new PushCommand(h2.getValue(),this);
-            }
-            else {
-                h2 = new PopCommand(h2.getValue(),this);
-            }
+            h1.undo();
             redoCommandList.addLast(h1);
-            h2.undo();// - Add always the first on the redo list...
+            undoCommandList.removeLast();          
         }
         catch (NoSuchElementException e){
            System.out.println("EMPTY STACK -> UNDO");
         }
     }
     
-
     @Override
     public void redo() {
         try {
-            
             Command h1 = redoCommandList.getLast();
-            redoCommandList.removeLast();
-
-            Command h2 = h1;
-
-            if (h1.getClass().getName().equals("commandGUI.PushCommand")) {
-                h2 = new PushCommand(h1.getValue(),this);
-            }
-            else {
-                h2 = new PopCommand(h1.getValue(),this);
-            }
-            undoCommandList.addLast(h2);
             h1.redo();
+            undoCommandList.addLast(h1);
+            redoCommandList.removeLast();
         }
         catch (NoSuchElementException e){
            System.out.println("EMPTY STACK -> UNDO");
         }
     }
-    
 }
 
 

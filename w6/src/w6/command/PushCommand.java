@@ -9,7 +9,6 @@ package w6.command;
  *
  * @author marina
  */
-
 public class PushCommand implements Command{
     private int i;
     private Stack s;
@@ -18,16 +17,14 @@ public class PushCommand implements Command{
         this.i = i;
         this.s = s;
     }
+    
     @Override
     public void undo() {
         s.data.removeLast();
     }
+    
     @Override
     public void redo() {
         s.data.addLast(i);
-    }
-    @Override
-    public int getValue() {
-        return i;        
     }
 }

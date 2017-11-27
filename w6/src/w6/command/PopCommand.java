@@ -18,16 +18,14 @@ public class PopCommand implements Command{
         this.i = i;
         this.s = s;
     }
+    
     @Override
     public void undo() {
-        s.data.removeLast();
-    }
-    @Override
-    public void redo() {
         s.data.addLast(i);
     }
+    
     @Override
-    public int getValue() {
-        return i;        
+    public void redo() {
+        s.data.removeLast();
     }
 }

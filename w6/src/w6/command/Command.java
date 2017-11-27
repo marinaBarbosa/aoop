@@ -12,5 +12,4 @@ package w6.command;
 interface Command {
     void undo();
     void redo();
-    int getValue();
 }
