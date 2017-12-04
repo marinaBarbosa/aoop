@@ -5,6 +5,8 @@
  */
 package w7;
 
+import w7.Board.NameIterator;
+
 /**
  *
  * @author marina
@@ -15,12 +17,20 @@ class WorkerThread implements Runnable {
 
     private Board p;
     private int x, y;
-
+    
     // x, y - initial position of iteration
     public WorkerThread(Board k, int x, int y) {
         this.p = k;
         this.x = x;
         this.y = y;
+    }
+    
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public void run() {
@@ -35,13 +45,22 @@ class WorkerThread implements Runnable {
             for (; j < p.getCols(); ++j) {
                 p.getAt(i, j).flip(); //change color
                 p.repaint();	*/	
-//refresh the screen
-                try {	//wait 
-                    Thread.currentThread().sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+        //refresh the screen
+        Board.NameIterator iter =  (NameIterator) p.iterator();
+        iter.setX(getX());
+        iter.setY(getY());
+        while(iter.hasNext()) {
+            Tile t = (Tile) iter.next();
+            if(t != null) {
+                    t.flip();
+                    p.repaint();
+            }
+            try {	//wait 
+                 Thread.currentThread().sleep(100);
+            } catch (InterruptedException e) {
+                 e.printStackTrace();
             }
         }
-   // }
-//}
+    }
+}
+   
