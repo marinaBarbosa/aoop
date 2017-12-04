@@ -10,8 +10,6 @@ package w7;
  * @author marina
  */
 
-import java.util.Iterator;
-
 public interface Container {
     public Iterator<Tile> iterator();
 }

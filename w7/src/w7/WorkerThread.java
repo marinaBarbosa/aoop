@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 package w7;
-
-import w7.Board.NameIterator;
-
+import w7.Iterator;
+import w7.Board;
 /**
  *
  * @author marina
@@ -46,7 +45,11 @@ class WorkerThread implements Runnable {
                 p.getAt(i, j).flip(); //change color
                 p.repaint();	*/	
         //refresh the screen
-        Board.NameIterator iter =  (NameIterator) p.iterator();
+        Iterator<Tile> iter;
+        iter = p.iterator();
+        //iter.hasNext
+        //NameIterator iter = p.getN();
+        //p.getN().setX(getX());
         iter.setX(getX());
         iter.setY(getY());
         while(iter.hasNext()) {

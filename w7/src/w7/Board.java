@@ -14,11 +14,13 @@ package w7;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import javax.swing.JPanel;
+import w7.Iterator;
 
 class Board extends JPanel implements Container{
 
     private Tile[][] matrix;
     private int tilesize;
+
     // higlighted (with mouse) tile 
     private int hx = -1, hy = -1;
 
@@ -56,48 +58,54 @@ class Board extends JPanel implements Container{
         repaint();
     }
 
-    // 3 methods to remove in the final version
-    /*public int getRows() {
-        return matrix.length;
-    }
-
-    public int getCols() {
-        return matrix[0].length;
-    }
-
-    public Tile getAt(int row, int col) {
-        return matrix[row][col];
-    }*/
-
     // intead - add the following method to get the iterator
     @Override
-    public Iterator iterator(){
+    public Iterator<Tile> iterator(){
         return new NameIterator();
     }
-    
-   private class NameIterator implements Iterator {
 
-      int x;
-      int y;
+    private class NameIterator implements Iterator<Tile> {	
+        
+    private int pX;
+    private int pY;
 
-      @Override
-      public boolean hasNext() {
-      
-         if(x < matrix[y].length){
-             x++;
-             System.out.println(x);
-           // return true;
-         }
-         return false;
-      }
+    @Override
+    public void setY(int pY) {
+        this.pY = pY;
+    }
+@Override
+    public void setX(int pX) {
+        this.pX = pX;
+    }
 
-      @Override
-      public Object next() {
-      
-         if(this.hasNext()){
-            return names[index++];
-         }
-         return null;
-      }		
-   }
+
+    @Override
+    public boolean hasNext() {
+        if (pY !=  matrix.length) {
+            if(pY < matrix.length && pX < matrix[pY].length ) {
+                return true;
+            }
+        return false;
+        }
+    return false;
+    }
+
+    @Override
+    public Tile next() {
+        Tile t = null;
+        if (hasNext()) {
+            if(pX < matrix[pY].length-1) {
+                pX++;
+            }
+            else {
+                pX = 0;
+                pY++;
+            }
+            if(pY != matrix.length)
+                t = matrix[pY][pX];
+                return t;
+            }
+        return t;
+        }
+    }
 }

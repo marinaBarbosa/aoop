@@ -5,14 +5,14 @@
  */
 package w7;
 
-import java.util.LinkedList;
-
 /**
  *
  * @author marina
  */
-public interface Iterator {
+public interface Iterator <Tile>{
     
    public boolean hasNext();
    public Tile next();
+   public void setY(int pY);
+   public void setX(int pX);
 }
