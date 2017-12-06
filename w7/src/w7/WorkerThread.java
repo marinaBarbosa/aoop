@@ -4,8 +4,7 @@
  * and open the template in the editor.
  */
 package w7;
-import w7.Iterator;
-import w7.Board;
+
 /**
  *
  * @author marina
@@ -33,25 +32,11 @@ class WorkerThread implements Runnable {
     }
 
     public void run() {
-        // iteration using 2 'for' loops - to be replaced with the iterator application
-        /*for (int i = y; i < p.getRows(); ++i) {
-            int j;
-            if (i == y) {
-                j = x;
-            } else {
-                j = 0;
-            }
-            for (; j < p.getCols(); ++j) {
-                p.getAt(i, j).flip(); //change color
-                p.repaint();	*/	
-        //refresh the screen
         Iterator<Tile> iter;
         iter = p.iterator();
-        //iter.hasNext
-        //NameIterator iter = p.getN();
-        //p.getN().setX(getX());
         iter.setX(getX());
         iter.setY(getY());
+
         while(iter.hasNext()) {
             Tile t = (Tile) iter.next();
             if(t != null) {

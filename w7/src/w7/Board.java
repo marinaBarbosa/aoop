@@ -64,48 +64,48 @@ class Board extends JPanel implements Container{
         return new NameIterator();
     }
 
-    private class NameIterator implements Iterator<Tile> {	
-        
-    private int pX;
-    private int pY;
+        private class NameIterator implements Iterator<Tile> {	
 
-    @Override
-    public void setY(int pY) {
-        this.pY = pY;
-    }
-@Override
-    public void setX(int pX) {
-        this.pX = pX;
-    }
+        private int pX;
+        private int pY;
 
+        @Override
+        public void setY(int pY) {
+            this.pY = pY;
+        }
 
-    @Override
-    public boolean hasNext() {
-        if (pY !=  matrix.length) {
-            if(pY < matrix.length && pX < matrix[pY].length ) {
-                return true;
+        @Override
+        public void setX(int pX) {
+            this.pX = pX;
+        }
+
+        @Override
+        public boolean hasNext() {
+            if (pY !=  matrix.length) {
+                if(pY < matrix.length && pX < matrix[pY].length ) {
+                    return true;
+                }
+            return false;
             }
         return false;
         }
-    return false;
-    }
 
-    @Override
-    public Tile next() {
-        Tile t = null;
-        if (hasNext()) {
-            if(pX < matrix[pY].length-1) {
-                pX++;
-            }
-            else {
-                pX = 0;
-                pY++;
-            }
-            if(pY != matrix.length)
-                t = matrix[pY][pX];
+        @Override
+        public Tile next() {
+            Tile t = null;
+            if (hasNext()) {
+                if(pX < matrix[pY].length-1) {
+                    pX++;
+                }
+                else {
+                    pX = 0;
+                    pY++;
+                }
+                if(pY != matrix.length)
+                    t = matrix[pY][pX];
                 return t;
-            }
-        return t;
+                }
+            return t;
         }
     }
 }
