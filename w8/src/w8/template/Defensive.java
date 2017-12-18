@@ -9,8 +9,9 @@ import java.util.Random;
 
 /**
  *
- * @author marin
+ * @author marina
  */
+
 public class Defensive extends Game{
     
     public Defensive(Board b) {

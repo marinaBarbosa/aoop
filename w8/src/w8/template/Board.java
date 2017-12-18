@@ -10,7 +10,7 @@ package w8.template;
  * @author marina
  */
 
-import java.util.*;
+
 
 class Board {
     public static final int FREE=0, COMPUTER=1, PLAYER=2, BLOCKED=3; 
@@ -69,8 +69,6 @@ class Board {
     }
     public int getSize() { return size; }
 }
-
-/*class Move { public int row, col; public Move(int r, int c) { row=r; col=c; } }*/
 
 
 

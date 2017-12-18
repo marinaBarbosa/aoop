@@ -3,16 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package w8.template;
+package w10;
+
 
 /**
  *
  * @author marina
  */
 
-public class Move { 
-    public int row, col; 
-    public Move(int r, int c) { 
-        row=r; col=c; 
-    } 
+public class Square extends Figure {
+    
+    public Square(double x, double y) {
+        super(x,y);
+    }
+    
+    @Override
+    public Object call(VisitorMethod v) {
+        return v.call(this);
+    }
 }

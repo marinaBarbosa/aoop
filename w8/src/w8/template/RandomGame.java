@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  *
- * @author marin
+ * @author marina
  */
 public class RandomGame extends Game{
 

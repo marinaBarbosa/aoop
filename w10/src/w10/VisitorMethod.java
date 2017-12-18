@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package w8.template;
+package w10;
 
 /**
  *
  * @author marina
  */
 
-public class Move { 
-    public int row, col; 
-    public Move(int r, int c) { 
-        row=r; col=c; 
-    } 
-}
+public interface VisitorMethod {
+    public Object call(Circle c);
+    public Object call(Triangule t);
+    public Object call(Square s);
+} 

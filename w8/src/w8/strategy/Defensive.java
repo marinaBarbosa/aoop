@@ -11,6 +11,7 @@ import java.util.Random;
  *
  * @author marina
  */
+
 public class Defensive implements Strategy{
 
     public Move calculateNextMove(Board b) {          
